@@ -4,6 +4,7 @@
 import sys, copy
 
 configs = []
+polya = []
 rot = []
 dim = 6
 
@@ -76,20 +77,16 @@ if __name__ == '__main__':
     print "Number of configurations: " + str(n) + "**6 = " + str(len(configs))
 
     # Et on élimine enfin les configurations redondantes
-    L0 = 0
-    while len(configs) != L0:
-        L0 = len(configs)
-        print str(L0)
-        for cube in configs:
-            i = configs.index(cube)
+    checklist = []
+    for cube in configs:
+        if cube not in checklist:
+            polya.append(copy.copy(cube))
+            print str(len(polya))
             for rotation in rot:
-                new = Rotat(cube,rotation)
-                if new in configs:
-                    if configs.index(new) != i:
-                        configs.remove(new)
+                old = Rotat(cube,rotation)
+                checklist.append(copy.copy(old))
 
 
-
-    print "Result: " + str(len(configs))
+    print "Result: " + str(len(polya))
 
     quit()
