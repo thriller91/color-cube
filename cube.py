@@ -36,7 +36,7 @@ def Isom():
         # Il faut que le cube reste réel, les deux nouvelles faces seront donc opposées
         cube[cube.index((i+1)%6)] = i
         cube[cube.index((5-(i+1))%6)] = (5-i)%6
-    rot.remove([0, 1, 2, 4 , 3, 5])
+    #rot.remove([0, 1, 2, 4 , 3, 5])
 
 # Fonction générant l'ensemble des cubes à n couleurs possible, il y a n**6 possibilités
 def ConfigGen(n):
@@ -81,12 +81,8 @@ if __name__ == '__main__':
     for cube in configs:
         if cube not in checklist:
             polya.append(copy.copy(cube))
-            print str(len(polya))
             for rotation in rot:
                 old = Rotat(cube,rotation)
                 checklist.append(copy.copy(old))
 
-
     print "Result: " + str(len(polya))
-
-    quit()
