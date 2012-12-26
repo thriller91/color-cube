@@ -24,6 +24,20 @@ def Isom():
     cube = [0, 1, 2, 4 , 3, 5]
 
     for i in range(6):
+        '''
+        for j in range(4):
+            cube[0] = i
+            cube[5] = (5-i)%6 # la face opposée à i est 5-i (modulo 6)
+            temp = cube[1]
+            cube[1] = cube[2]
+            cube[2] = cube[3]
+            cube[3] = cube[4]
+            cube[4] = temp
+            rot.append(copy.copy(cube))
+        temp = cube[1]
+        cube[1] = cube[2]
+        cube[2] = temp
+        '''
         for j in range(4):
             cube[0] = i
             cube[5] = (5-i)%6 # la face opposée à i est 5-i (modulo 6)
@@ -83,6 +97,7 @@ if __name__ == '__main__':
             polya.append(copy.copy(cube))
             for rotation in rot:
                 old = Rotat(cube,rotation)
-                checklist.append(copy.copy(old))
+                if not old in checklist:
+                    checklist.append(copy.copy(old))
 
     print "Result: " + str(len(polya))
