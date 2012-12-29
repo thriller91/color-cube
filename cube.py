@@ -21,36 +21,13 @@ else:
 
 # Fonction générant l'ensemble des rotation physiques du cube, elle sont au nombre de 24
 def Isom():
-    cube = [0, 1, 2, 4 , 3, 5]
-
-    for i in range(6):
-        '''
-        for j in range(4):
-            cube[0] = i
-            cube[5] = (5-i)%6 # la face opposée à i est 5-i (modulo 6)
-            temp = cube[1]
-            cube[1] = cube[2]
-            cube[2] = cube[3]
-            cube[3] = cube[4]
-            cube[4] = temp
-            rot.append(copy.copy(cube))
-        temp = cube[1]
-        cube[1] = cube[2]
-        cube[2] = temp
-        '''
-        for j in range(4):
-            cube[0] = i
-            cube[5] = (5-i)%6 # la face opposée à i est 5-i (modulo 6)
-            temp = cube[1]
-            cube[1] = cube[2]
-            cube[2] = cube[3]
-            cube[3] = cube[4]
-            cube[4] = temp
-            rot.append(copy.copy(cube)) # on utilise "copy" parce que sinon, "rot" contient 24 fois la même liste
-        # Il faut que le cube reste réel, les deux nouvelles faces seront donc opposées
-        cube[cube.index((i+1)%6)] = i
-        cube[cube.index((5-(i+1))%6)] = (5-i)%6
-    #rot.remove([0, 1, 2, 4 , 3, 5])
+    isom = open("rotations.txt", "r")
+    for line in isom:
+        cube = []
+        for face in line.split():
+            cube.append(int(face))
+        rot.append(cube)
+    isom.close()
 
 # Fonction générant l'ensemble des cubes à n couleurs possible, il y a n**6 possibilités
 def ConfigGen(n):
@@ -97,7 +74,11 @@ if __name__ == '__main__':
             polya.append(copy.copy(cube))
             for rotation in rot:
                 old = Rotat(cube,rotation)
-                if not old in checklist:
-                    checklist.append(copy.copy(old))
+                #if not old in checklist:
+                checklist.append(copy.copy(old))
 
     print "Result: " + str(len(polya))
+
+    print polya
+
+    print str(len(checklist)) + " \n" + str(24*len(polya))
